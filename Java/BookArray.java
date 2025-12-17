@@ -42,6 +42,7 @@ public class BookArray {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         int n= sc.nextInt();
+        sc.nextLine(); // Consume the newline character
         Book[] books = new Book[n];
         for(int i=0;i<n;i++){
             System.out.println("Enter book " + (i+1) + " details (name author price num):");
