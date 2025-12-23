@@ -20,7 +20,7 @@ public class MainMarks {
             System.out.print("Enter Name: ");
             s.name = sc.nextLine();
             System.out.print("Enter sem: ");
-            s.sem = sc.nextInt();
+            //s.sem = sc.nextInt();
             System.out.println("Enter Internals marks for 5 subjects:");
             for(int j = 0; j < 5; j++)
                 in.marks[j] = sc.nextInt();
