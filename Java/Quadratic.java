@@ -25,5 +25,6 @@ public class Quadratic {
             System.out.println("Root 1: " + realPart + " + " + imagPart + "i");
             System.out.println("Root 2: " + realPart + " - " + imagPart + "i");
         }
+        sc.close();
     }
 }

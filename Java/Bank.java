@@ -1,118 +1,88 @@
 package Java;
 import java.util.*;
-//@SuppressWarnings("unused")
+
 class Account {
     String name;
     int accNo;
     String accType;
     double balance;
 
-    void acceptDetails() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter Customer Name: ");
+    void getDetails(Scanner sc) {
+        System.out.print("Name: ");
         name = sc.nextLine();
-
-        System.out.print("Enter Account Number: ");
+        System.out.print("Account No: ");
         accNo = sc.nextInt();
         sc.nextLine();
-
-        System.out.print("Enter Account Type: ");
+        System.out.print("Account Type: ");
         accType = sc.nextLine();
-
-        System.out.print("Enter Initial Balance: ");
+        System.out.print("Initial Balance: ");
         balance = sc.nextDouble();
-        sc.close();
     }
 
     void deposit(double amt) {
         balance += amt;
-        System.out.println("Amount deposited successfully");
     }
 
     void displayBalance() {
-        System.out.println("Balance = " + balance);
+        System.out.println("Balance: " + balance);
     }
 }
 
-// Savings Account
 class SavAcct extends Account {
-
     void computeInterest() {
-        double interest = balance * 0.05;   // 5% interest
-        balance += interest;
-        System.out.println("Interest added: " + interest);
+        balance = balance * Math.pow(1.05, 1);   // compound interest
     }
 
     void withdraw(double amt) {
-        if (amt <= balance) {
+        if (amt <= balance)
             balance -= amt;
-            System.out.println("Withdrawal successful");
-        } else {
+        else
             System.out.println("Insufficient balance");
-        }
     }
 }
 
-// Current Account
 class CurAcct extends Account {
-    double minBalance = 1000;
+    double minBal = 1000;
     double penalty = 100;
 
     void withdraw(double amt) {
         if (amt <= balance) {
             balance -= amt;
-
-            if (balance < minBalance) {
+            if (balance < minBal){
                 balance -= penalty;
-                System.out.println("Minimum balance not maintained");
-                System.out.println("Penalty imposed: " + penalty);
+                System.out.println("Penalty imposed due to low balance");
             }
-        } else {
-            System.out.println("Insufficient balance");
         }
+    }
+
+    void chequeBook() {
+        System.out.println("Cheque book facility available");
     }
 }
 
-// Main class
 public class Bank {
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
 
         System.out.println("1. Savings Account");
         System.out.println("2. Current Account");
-        System.out.print("Enter choice: ");
-        int choice = sc.nextInt();
+        int ch = sc.nextInt();
+        sc.nextLine();
 
-        if (choice == 1) {
+        if (ch == 1) {
             SavAcct s = new SavAcct();
-            s.acceptDetails();
-
-            System.out.print("Enter deposit amount: ");
-            s.deposit(sc.nextDouble());
-
+            s.getDetails(sc);
+            s.deposit(500);
             s.computeInterest();
-
-            System.out.print("Enter withdrawal amount: ");
-            s.withdraw(sc.nextDouble());
-
+            s.withdraw(300);
             s.displayBalance();
-        }
-        else if (choice == 2) {
+        } else {
             CurAcct c = new CurAcct();
-            c.acceptDetails();
-
-            System.out.print("Enter deposit amount: ");
-            c.deposit(sc.nextDouble());
-
-            System.out.print("Enter withdrawal amount: ");
-            c.withdraw(sc.nextDouble());
-
+            c.getDetails(sc);
+            c.deposit(500);
+            c.withdraw(300);
+            c.chequeBook();
             c.displayBalance();
-        }
-        else {
-            System.out.println("Invalid choice");
         }
 
         sc.close();
